@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Les projets de Sleeping Room, Soigner ou Saigner et Al Maydan : pédagogie médicale, inégalités de soins et culture. Découvrez-les et proposez votre aide.">
+<title>Nos projets</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Instrument+Sans:wght@400;500;600&display=swap">
+<style>
+/* Mise en page : trois panneaux pleins côte à côte, un par collectif ; seuls les noms des projets y figurent. Le détail s'ouvre dans une fiche. */
+:root {
+  color-scheme: light;
+  --bg: #f4f4f7;
+  --surface: #ffffff;
+  --ink: #18181f;
+  --muted: #5c5c6b;
+  --line: #dedee6;
+  --soft: #ececf2;
+  --sr: #2f3384;      /* Sleeping Room */
+  --sos: #a11f2a;     /* Soigner ou Saigner */
+  --am: #1f6b15;      /* Al Maydan */
+  --on-c: #ffffff;
+  --sr-t: #2f3384; --sos-t: #a11f2a; --am-t: #1f6b15;   /* même teinte, pour le texte sur fond clair */
+  --display: "Newsreader", "Iowan Old Style", Georgia, serif;
+  --body: "Instrument Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111116; --surface: #1b1b22; --ink: #ececf2; --muted: #a2a2b2; --line: #2d2d38; --soft: #25252e;
+    --sr: #2a2d6e; --sos: #7c1b24; --am: #1c5114; --on-c: #f2f2f7;
+    --sr-t: #a7abf3; --sos-t: #f2848b; --am-t: #84d070;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111116; --surface: #1b1b22; --ink: #ececf2; --muted: #a2a2b2; --line: #2d2d38; --soft: #25252e;
+  --sr: #2a2d6e; --sos: #7c1b24; --am: #1c5114; --on-c: #f2f2f7;
+  --sr-t: #a7abf3; --sos-t: #f2848b; --am-t: #84d070;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+[hidden] { display: none !important; }
+body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.5; }
+.wrap { max-width: 1180px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1, h2, h3 { font-family: var(--display); font-weight: 500; line-height: 1.1; margin: 0; text-wrap: balance; letter-spacing: -0.01em; }
+p { margin: 0; }
+button, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+
+[data-c="sr"] { --c: var(--sr); --ct: var(--sr-t); }
+[data-c="sos"] { --c: var(--sos); --ct: var(--sos-t); }
+[data-c="am"] { --c: var(--am); --ct: var(--am-t); }
+
+/* En-tête */
+.top { padding-block: 36px 28px; display: flex; justify-content: space-between; align-items: end; gap: 12px 32px; flex-wrap: wrap; }
+.top h1 { font-size: clamp(2.6rem, 7vw, 4rem); }
+.top p { color: var(--muted); max-width: 40ch; }
+
+/* Panneaux */
+.boards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; padding-bottom: 28px; }
+.board { position: relative; overflow: hidden; background: var(--c); color: var(--on-c); border-radius: 14px; padding: 26px 22px 18px; display: grid; grid-template-rows: auto 1fr; gap: 26px; min-height: 460px; }
+.board .mark { position: absolute; right: -28px; bottom: -34px; width: 190px; height: 190px; opacity: .13; pointer-events: none; }
+.board header { display: grid; gap: 4px; }
+.board header .kind { font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; opacity: .78; }
+.board header h2 { font-size: clamp(1.8rem, 3.4vw, 2.3rem); }
+.board ul { list-style: none; margin: 0; padding: 0; display: grid; align-content: start; position: relative; }
+.board li + li { border-top: 1px solid color-mix(in srgb, var(--on-c) 22%, transparent); }
+.proj { width: 100%; background: none; border: 0; color: inherit; text-align: left; padding: 14px 4px; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 2px 12px; border-radius: 6px; transition: background .15s; }
+.proj:hover { background: color-mix(in srgb, var(--on-c) 10%, transparent); }
+.proj b { font-family: var(--display); font-weight: 500; font-size: 1.45rem; line-height: 1.15; }
+.proj small { grid-column: 1; font-size: 0.88rem; opacity: .78; }
+.proj i { grid-row: 1 / span 2; grid-column: 2; font-style: normal; font-size: 1.2rem; opacity: .6; transition: transform .15s, opacity .15s; }
+.proj:hover i { transform: translateX(3px); opacity: 1; }
+
+.foot { color: var(--muted); font-size: 0.85rem; padding-block: 8px 36px; }
+
+/* Fiche */
+dialog { border: 0; padding: 0; background: var(--surface); color: var(--ink); width: min(580px, calc(100% - 24px)); max-height: 88vh; border-radius: 14px; box-shadow: 0 24px 70px rgba(10, 10, 30, .3); }
+dialog::backdrop { background: rgba(12, 12, 22, .5); }
+.sheet-band { background: var(--c); color: var(--on-c); padding: 18px 22px; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.sheet-band span { font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.close { border: 0; background: color-mix(in srgb, var(--on-c) 18%, transparent); color: var(--on-c); border-radius: 50%; width: 34px; height: 34px; font-size: 1.15rem; line-height: 1; flex: none; }
+.sheet { padding: 22px; display: grid; gap: 18px; }
+.sheet h2 { font-size: 2.1rem; }
+.sheet h2 span { color: var(--muted); font-weight: 400; font-size: 0.7em; }
+.sheet .desc { font-size: 1.08rem; }
+.facts { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 0; }
+.facts div { background: var(--soft); border-radius: 10px; padding: 10px 12px; }
+.facts dt { font-size: 0.75rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); }
+.facts dd { margin: 2px 0 0; font-size: 0.95rem; }
+.find { display: grid; gap: 8px; }
+.find h3 { font-family: var(--body); font-size: 0.95rem; font-weight: 600; }
+.find ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.find li { display: grid; grid-template-columns: 10px 1fr; gap: 10px; align-items: baseline; }
+.find li::before { content: ""; width: 10px; height: 10px; border-radius: 3px; background: var(--c); transform: translateY(1px); }
+.acts { display: flex; gap: 8px; flex-wrap: wrap; }
+.btn { border: 1px solid var(--c); background: var(--c); color: var(--on-c); border-radius: 8px; padding: 10px 16px; font-weight: 500; text-decoration: none; display: inline-flex; gap: 6px; align-items: center; }
+.btn.ghost { background: transparent; color: var(--ct); }
+.helpbox { display: grid; gap: 12px; border-top: 1px solid var(--line); padding-top: 18px; }
+.helpbox h3 { font-family: var(--body); font-size: 0.95rem; font-weight: 600; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 6px 13px; font-size: 0.92rem; }
+.chip[aria-pressed="true"] { background: var(--c); color: var(--on-c); border-color: var(--c); }
+textarea { width: 100%; min-height: 150px; resize: vertical; background: var(--soft); border: 1px solid var(--line); border-radius: 8px; padding: 12px; font-size: 0.93rem; line-height: 1.55; }
+.note { font-size: 0.86rem; color: var(--muted); }
+
+@media (max-width: 860px) {
+  .facts { grid-template-columns: minmax(0, 1fr); }
+  .boards { grid-template-columns: minmax(0, 1fr); }
+  .board { min-height: 0; gap: 18px; }
+  .board .mark { width: 150px; height: 150px; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+
+<main class="wrap">
+  <header class="top">
+    <h1>Nos projets</h1>
+    <p>Trois collectifs, onze projets. Touchez un projet pour le découvrir ou proposer votre aide.</p>
+  </header>
+  <div class="boards" id="boards"></div>
+  <p class="foot">Projets en construction : contenus sourcés, pas encore relus par des spécialistes.</p>
+</main>
+
+<dialog id="dlg" aria-labelledby="dlgTitle"></dialog>
+
+<script>
+const MARK = {
+  sr: '<path d="M15.5 3.5a8.5 8.5 0 1 0 5 15.4A7 7 0 0 1 15.5 3.5Z" fill="currentColor"/>',
+  sos: '<path d="M12 2.5C9 7 6 10.4 6 14.2a6 6 0 0 0 12 0C18 10.4 15 7 12 2.5Z" fill="currentColor"/>',
+  am: '<g fill="currentColor" transform="translate(4.6 0) scale(0.0889)"><circle cx="72" cy="9" r="5.5"/><rect x="68" y="11" width="8" height="14"/><path d="M30,98 L30,70 C30,38 48,24 72,24 C96,24 114,38 114,70 L114,98 Z"/><rect x="0" y="104" width="42" height="46"/><rect x="48" y="98" width="48" height="52"/><rect x="102" y="104" width="42" height="46"/><rect x="48" y="150" width="48" height="120"/></g>'
+};
+
+const COLL = [
+  { id: "sr", hash: "sleeping-room", name: "Sleeping Room", kind: "Pédagogie médicale", contact: "" },
+  { id: "sos", hash: "soigner-ou-saigner", name: "Soigner ou Saigner", kind: "Inégalités de soins", contact: "" },
+  { id: "am", hash: "al-maydan", name: "Al Maydan", kind: "Culture", contact: "" }
+];
+
+const PAGES = "https://sleepingroomer.github.io/";
+/* repo : dépôt publié sur GitHub Pages (sleepingroomer.github.io/<repo>/) ; soon : projet à lancer */
+const P = [
+  { id: "semiological", c: "sr", name: "Semiological", tag: "Reconnaître les signes cliniques rares", repo: "semiological",
+    desc: "Un répertoire de signes cliniques rares ou peu connus, pour apprendre à les reconnaître au lit du patient. Chaque signe est dessiné et sourcé.",
+    who: "Étudiants en médecine, médecins", state: "Prototype · 17 signes",
+    find: ["Un dessin original par signe", "Comment le chercher et ce qu'il évoque", "Ce que disent les études, chiffres à l'appui"],
+    needs: ["Relecture médicale", "Photos sous licence libre", "Dessins"] },
+  { id: "physiopath", c: "sr", name: "Physiopath", tag: "Comprendre le mécanisme des maladies", repo: "physiopath",
+    desc: "Comprendre comment une maladie se met en place, étape par étape, plutôt qu'apprendre une liste de symptômes. Chaque étape cite sa source.",
+    who: "Étudiants en médecine, médecins", state: "Prototype · 6 maladies",
+    find: ["Le mécanisme en cinq étapes reliées", "Les points encore discutés", "Un lien vers les signes de Semiological"],
+    needs: ["Relecture médicale", "Écrire une fiche", "Schémas"] },
+  { id: "methodes", c: "sr", name: "Methodocs", tag: "Des méthodes de révision gratuites et sourcées", repo: "methodocs",
+    desc: "Les méthodes de révision qui ont fait leurs preuves, expliquées et sourcées, pour que réussir ses études de santé ne dépende pas du prix d'une prépa.",
+    who: "Étudiants en santé : médecine, pharmacie, maïeutique, odontologie, kiné, soins infirmiers", state: "Prototype · 9 fiches méthode",
+    find: ["Des fiches méthode appuyées sur les études", "Des outils gratuits, avec leur mode d'emploi", "De l'entraide et des retours d'expérience, relus avant publication"],
+    needs: ["Partager une méthode", "Relire les fiches", "Code"] },
+  { id: "atlas", c: "sr", name: "Quelle spé est faite pour moi\u00a0?", tag: "Un quiz et des jeux pour choisir sa spécialité", repo: "specialites",
+    desc: "Trois façons ludiques de découvrir les spécialités qui vous ressemblent, sans qu'on vous demande jamais laquelle vous voulez faire.",
+    who: "Externes et étudiants qui préparent leur choix de spécialité", state: "Prototype · 44 spécialités",
+    find: ["Un quiz de goûts, cinq mini-jeux et un parcours de stages", "Une fiche par spécialité : le métier et la formation", "Un comparateur pour mettre 2 à 4 spécialités côte à côte"],
+    needs: ["Relire sa spécialité", "Tester"] },
+  { id: "carnet", c: "sr", name: "Anecdocs", tag: "Des anecdotes sur l'histoire de la médecine", repo: "anecdocs",
+    desc: "Des histoires vraies, et quelques légendes, tirées de l'histoire de la médecine : premières opérations, origine des mots, naissance des spécialités.",
+    who: "Étudiants, soignants, curieux", state: "Prototype · 19 anecdotes",
+    find: ["Quatre rubriques : histoire, spécialités, étymologie, premières", "Pour chaque anecdote : établi, discuté ou légende", "Les sources, toujours affichées"],
+    needs: ["Proposer une anecdote", "Vérifier des sources"] },
+
+  { id: "se-soigner", c: "sos", name: "Se soigner en France", tag: "Ses droits aux soins quand on est précaire ou étranger", repo: "se-soigner",
+    desc: "Comprendre ses droits à la santé quand on vit dans la précarité, notamment quand on est étranger, et trouver où se soigner près de chez soi.",
+    who: "Personnes concernées, aidants, travailleurs sociaux et soignants", state: "Prototype · 5 langues · 8 454 lieux de soin",
+    find: ["Un simulateur : à quelles aides ai-je droit (PUMa, C2S, AME…) ?", "Les lieux de soin les plus proches, selon le besoin", "Des phrases à montrer au guichet, en grands caractères"],
+    needs: ["Traduire (pachto, dari, arabe)", "Relecture juridique", "Tester"] },
+  { id: "malades", c: "sos", name: "Malades", tag: "Des personnalités parlent de leur maladie", repo: "nous-aussi",
+    desc: "Des personnalités qui ont parlé publiquement de leur maladie. Voir quelqu'un qu'on connaît en parler aide à en parler soi-même et à se sentir moins seul.",
+    who: "Patients, proches, grand public", state: "Prototype · premier lot de fiches à vérifier",
+    find: ["Une fiche par personnalité : ce qu'elle a dit, avec la source", "Une page par maladie, avec les associations de patients", "Une frise : quand chaque maladie a été décrite"],
+    needs: ["Vérifier des sources", "Relecture médicale"] },
+  { id: "decoloniser", c: "sos", name: "Décoloniser la médecine", tag: "La médecine face à son passé colonial", repo: "decoloniser-la-medecine", soon: true, lbl: "Voir la présentation",
+    desc: "Mettre en lumière les liens entre santé et colonisation, faire connaître des médecines qui ne sont pas centrées sur l'Occident, et rappeler que la médecine n'est pas immaculée.",
+    who: "Étudiants, soignants, grand public", state: "Projet à lancer",
+    find: ["L'histoire de la médecine coloniale et de ses abus", "Des savoirs médicaux nés ailleurs qu'en Occident", "Ce que ce passé laisse dans le soin d'aujourd'hui"],
+    needs: ["Proposer un sujet", "Partager des sources", "Écrire un article"] },
+
+  { id: "al-maktaba", c: "am", name: "Al Maktaba", ar: "المكتبة", tag: "Livres, films et podcasts à partager", repo: "almaktaba",
+    desc: "La bibliothèque ouverte d'Al Maydan : livres, films, podcasts, personnalités et initiatives, proposés par la communauté et relus avant publication.",
+    who: "Tout public", state: "En ligne · arbre des idées en préparation",
+    find: ["Des ressources pour une élévation spirituelle, intellectuelle et culturelle", "Un arbre pour explorer les grandes idées", "Un formulaire pour proposer une ressource"],
+    needs: ["Proposer une ressource", "Relire des suggestions", "Code"] },
+  { id: "sullam", c: "am", name: "Sullam", ar: "سُلَّم", tag: "Des stages de 3e et de 2de pour les élèves sans réseau", repo: "sullam",
+    desc: "Des stages d'observation de 3e et de seconde pour les élèves qui ne connaissent personne en médecine, en droit, dans la recherche ou les institutions.",
+    who: "Collégiens, lycéens, et les professionnels qui les accueillent", state: "Prototype",
+    find: ["Des offres de stage dans les métiers sans réseau", "Le cadre légal de l'accueil d'un élève, expliqué", "Des réponses aux cas sensibles : secret médical, audiences…"],
+    needs: ["Accueillir un élève", "Devenir relais-contact", "Relecture juridique"] },
+  { id: "iftar", c: "am", name: "Un Ftor pour tous", tag: "Trouver un iftar près de chez soi", repo: "unftorpourtous", lbl: "Voir la maquette",
+    desc: "Une carte collaborative pour trouver un iftar près de chez soi pendant le Ramadan, ou en proposer un : repas partagés, distributions, tables ouvertes.",
+    who: "Tout le monde, et d'abord les personnes seules, étudiantes ou précaires pendant le Ramadan", state: "Maquette, avec des exemples fictifs",
+    find: ["La carte et la liste des iftars, avec les places restantes", "L'heure du ftor dans sa ville", "Un formulaire pour proposer un iftar, relu avant publication"],
+    needs: ["Signaler un iftar", "Associations partenaires", "Code"] }
+];
+
+const collById = Object.fromEntries(COLL.map(c => [c.id, c]));
+const projById = Object.fromEntries(P.map(p => [p.id, p]));
+const esc = s => String(s).replace(/[&<>"]/g, ch => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[ch]));
+
+/* Panneaux */
+document.getElementById("boards").innerHTML = COLL.map(c => `
+  <section class="board" data-c="${c.id}" id="${c.hash}" aria-labelledby="h-${c.id}">
+    <svg class="mark" viewBox="0 0 24 24" aria-hidden="true">${MARK[c.id]}</svg>
+    <header><span class="kind">${c.kind}</span><h2 id="h-${c.id}">${c.name}</h2></header>
+    <ul>${P.filter(p => p.c === c.id).map(p => `<li><button class="proj" type="button" data-open="${p.id}">
+      <b>${esc(p.name)}</b><small>${esc(p.tag)}</small><i aria-hidden="true">→</i></button></li>`).join("")}</ul>
+  </section>`).join("");
+document.getElementById("boards").addEventListener("click", e => {
+  const b = e.target.closest("[data-open]"); if (b) openProject(b.dataset.open);
+});
+
+/* Fiche */
+const dlg = document.getElementById("dlg");
+let current = null;
+function openProject(id) {
+  const p = projById[id]; if (!p) return;
+  const c = collById[p.c];
+  current = { p, need: null };
+  dlg.dataset.c = p.c;
+  dlg.innerHTML = `
+    <div class="sheet-band"><span>${c.name}</span><button class="close" type="button" data-close aria-label="Fermer">×</button></div>
+    <div class="sheet">
+      <h2 id="dlgTitle">${esc(p.name)}${p.ar ? ` <span lang="ar">${p.ar}</span>` : ""}</h2>
+      <p class="desc">${esc(p.desc)}</p>
+      <dl class="facts">
+        <div><dt>Pour qui</dt><dd>${esc(p.who)}</dd></div>
+        <div><dt>Où on en est</dt><dd>${esc(p.state)}</dd></div>
+      </dl>
+      <div class="find">
+        <h3>${p.soon ? "Ce qu'on y trouvera" : "Ce qu'on y trouve"}</h3>
+        <ul>${p.find.map(f => `<li>${esc(f)}</li>`).join("")}</ul>
+      </div>
+      <div class="acts">
+        <a class="btn" href="${PAGES + p.repo + "/"}" target="_blank" rel="noopener">${p.lbl || "Voir le site"} ↗</a>
+        <button class="btn ghost" type="button" data-help aria-expanded="false">Aider</button>
+      </div>
+      <div class="helpbox" hidden>
+        <h3>On cherche</h3>
+        <div class="chips">${p.needs.map((n, i) => `<button class="chip" type="button" data-need="${i}" aria-pressed="false">${esc(n)}</button>`).join("")}</div>
+        <label class="note" for="msg">Votre message, à compléter puis copier :</label>
+        <textarea id="msg"></textarea>
+        <div class="acts"><button class="btn" type="button" data-copy>Copier</button></div>
+        <p class="note" data-status>${c.contact ? "À envoyer à " + esc(c.contact) : "L'adresse de " + esc(c.name) + " arrive bientôt sur cette page."}</p>
+      </div>
+    </div>`;
+  if (!dlg.open) dlg.showModal();
+}
+function message() {
+  const { p } = current, c = collById[p.c];
+  const need = current.need == null ? "[ce que vous proposez]" : p.needs[current.need].toLowerCase();
+  return `Bonjour,\n\nJe voudrais aider ${p.name} (${c.name}) : ${need}.\n\n[Quelques mots sur vous]\n\n[Votre nom]\n[Mail ou téléphone]`;
+}
+dlg.addEventListener("click", async e => {
+  if (e.target === dlg || e.target.closest("[data-close]")) { dlg.close(); return; }
+  const box = dlg.querySelector(".helpbox"), ta = dlg.querySelector("#msg");
+  if (e.target.closest("[data-help]")) {
+    box.hidden = !box.hidden;
+    e.target.closest("[data-help]").setAttribute("aria-expanded", String(!box.hidden));
+    if (!box.hidden && !ta.value) ta.value = message();
+    return;
+  }
+  const n = e.target.closest("[data-need]");
+  if (n) {
+    const before = message();
+    current.need = +n.dataset.need;
+    dlg.querySelectorAll("[data-need]").forEach(b => b.setAttribute("aria-pressed", String(b === n)));
+    if (!ta.value || ta.value === before) ta.value = message();
+    else ta.value = ta.value.replace(/: [^\n]*\.\n/, ": " + current.p.needs[current.need].toLowerCase() + ".\n");
+    return;
+  }
+  if (e.target.closest("[data-copy]")) {
+    const st = dlg.querySelector("[data-status]");
+    try { await navigator.clipboard.writeText(ta.value); st.textContent = "Message copié."; }
+    catch (_) { ta.select(); st.textContent = "Message sélectionné : copiez-le avec Ctrl+C (ou ⌘+C)."; }
+  }
+});
+
+/* Liens directs : #sleeping-room, #soigner-ou-saigner, #al-maydan, #p-<projet> */
+function fromHash() {
+  const h = location.hash.slice(1);
+  if (h.startsWith("p-") && projById[h.slice(2)]) openProject(h.slice(2));
+}
+fromHash();
+addEventListener("hashchange", fromHash);
+</script>
+
+</body>
+</html>
