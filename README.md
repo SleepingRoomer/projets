@@ -1,4 +1,4 @@
-# Nos projets
+# Les projets
 
 La page qui présente les projets de trois collectifs, et permet de proposer son aide :
 
